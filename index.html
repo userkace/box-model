@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <title>CSS Box Model</title>
+     <style>
+          .box {
+               max-width: 100px;
+               background-color: red;
+               background-clip: padding-box;
+               margin: 50px;
+               border: 20px solid blue;
+               padding: 30px;
+               background-color: lightgrey;
+               transition: all 1s;
+               outline: green solid;
+               outline-width: 50px;
+               box-shadow: inset 0 0 0 30px red, inset 0 0 0 30px red;
+               transition: all 1s;
+          }
+     </style>
+     <script>
+          function updateBox() {
+               const box = document.querySelector('.box');
+               const margin = document.getElementById('margin').value;
+               const border = document.getElementById('border').value;
+               const padding = document.getElementById('padding').value;
+               const content = document.getElementById('content').value;
+
+               box.style.margin = `${margin}px`;
+               box.style.borderWidth = `${border}px`;
+               box.style.padding = `${padding}px`;
+               box.innerHTML =
+                    `<p style="margin:0; padding:0; background-color: lightgrey;">${content}</p>`;
+               box.style.outlineWidth = `${margin}px`;
+               box.style.boxShadow = `inset 0 0 0 0 red, inset 0 0 0 ${padding}px red`;
+
+               document.getElementById('marginValue').textContent = `${margin}px`;
+               document.getElementById('borderValue').textContent = `${border}px`;
+               document.getElementById('paddingValue').textContent = `${padding}px`;
+          }
+     </script>
+</head>
+
+<body onload="updateBox()">
+     <div
+          style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; padding-bottom: 6em;">
+          <label for="margin">Margin: <span id="marginValue">50px</span></label>
+          <input style="accent-color: green;" type="range" id="margin" name="margin" min="0" max="100" value="50"
+               onchange="updateBox()" oninput="updateBox()">
+
+          <label for="border">Border: <span id="borderValue">20px</span></label>
+          <input style="accent-color: blue;" type="range" id="border" name="border" min="0" max="100" value="20"
+               onchange="updateBox()" oninput="updateBox()">
+
+          <label for="padding">Padding: <span id="paddingValue">30px</span></label>
+          <input style="accent-color: red;" type="range" id="padding" name="padding" min="0" max="100" value="30"
+               onchange="updateBox()" oninput="updateBox()">
+
+          <label for="content">Content</label>
+          <input style="padding: 10px; border-radius: 10px;" type="text" id="content" name="content"
+               value="Made by Kace" onchange="updateBox()" oninput="updateBox()">
+     </div>
+     <div style="display: flex; justify-content: center; align-items: center;">
+          <div class="box">
+          </div>
+     </div>
+     <footer style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); padding-bottom: 1em;">
+          <button onclick="window.location.href = 'https://github.com/userkace/box-model'">GitHub</button>
+     </footer>
+</body>
+
+</html>
