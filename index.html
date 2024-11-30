@@ -2,10 +2,10 @@
 <html>
 
 <head>
+     <link rel="shortcut icon" href="icon.ico" type="image/x-icon">
      <title>CSS Box Model</title>
      <style>
           .box {
-               max-width: 100px;
                background-color: red;
                background-clip: padding-box;
                margin: 50px;
@@ -17,6 +17,20 @@
                outline-width: 50px;
                box-shadow: inset 0 0 0 30px red, inset 0 0 0 30px red;
                transition: all 1s;
+          }
+
+          * {
+               font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          button {
+               padding: 6px;
+               border-radius: 10px;
+               transition: all 0.5s;
+          }
+
+          button:hover {
+               background-color: #ccc;
           }
      </style>
      <script>
@@ -43,31 +57,55 @@
 </head>
 
 <body onload="updateBox()">
-     <div
-          style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; padding-bottom: 6em;">
-          <label for="margin">Margin: <span id="marginValue">50px</span></label>
+     <div style="display: flex; justify-content: center; align-items: center;">
+          <div class="box" style="user-select: none;">
+          </div>
+     </div>
+     <div id="controls" style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 5px; padding-bottom: 4.2em;">
+          <label for="margin">Margin: <b><span id="marginValue">50px</span></b></label>
           <input style="accent-color: green;" type="range" id="margin" name="margin" min="0" max="100" value="50"
                onchange="updateBox()" oninput="updateBox()">
 
-          <label for="border">Border: <span id="borderValue">20px</span></label>
+          <label for="border">Border: <b><span id="borderValue">20px</span></b></label>
           <input style="accent-color: blue;" type="range" id="border" name="border" min="0" max="100" value="20"
                onchange="updateBox()" oninput="updateBox()">
 
-          <label for="padding">Padding: <span id="paddingValue">30px</span></label>
+          <label for="padding">Padding: <b><span id="paddingValue">30px</span></b></label>
           <input style="accent-color: red;" type="range" id="padding" name="padding" min="0" max="100" value="30"
                onchange="updateBox()" oninput="updateBox()">
 
+          <button id="toggle-styles" style="margin: 10px 0 0 0;">
+               Toggle Visibility
+          </button>
+
           <label for="content">Content</label>
           <input style="padding: 10px; border-radius: 10px;" type="text" id="content" name="content"
-               value="Made by Kace" onchange="updateBox()" oninput="updateBox()">
+               value="Made by Kace" maxlength="25" onchange="updateBox()" oninput="updateBox()">
      </div>
-     <div style="display: flex; justify-content: center; align-items: center;">
-          <div class="box">
-          </div>
-     </div>
-     <footer style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); padding-bottom: 1em;">
-          <button onclick="window.location.href = 'https://github.com/userkace/box-model'">GitHub</button>
+     <footer
+          style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); display: flex; flex-direction: row; gap:10px; padding-bottom: 1em;">
+          <button onclick="window.location.href = 'https://github.com/userkace/'">GitHub</button>
+          <button onclick="window.location.href = 'https://github.com/userkace/box-model'">Repository</button>
      </footer>
+     <script>
+          document.getElementById('toggle-styles').addEventListener('click', function () {
+               const box = document.querySelector('.box');
+               const outlineVisible = box.style.outlineWidth !== '0px';
+               const boxShadowVisible = box.style.boxShadow !== 'none';
+
+               const padding = document.getElementById('padding').value;
+               const margin = document.getElementById('margin').value;
+
+               if (outlineVisible && boxShadowVisible) {
+                    box.style.outlineWidth = '0px';
+                    box.style.boxShadow = 'none';
+               } else {
+                    box.style.outlineWidth = `${margin}px`;
+                    box.style.boxShadow =
+                         `inset 0 0 0 ${padding}px red, inset 0 0 0 ${padding}px red, inset 0 0 0 ${padding}px red`;
+               }
+          });
+     </script>
 </body>
 
 </html>
