@@ -93,6 +93,12 @@
 
 <script>
      window.addEventListener('resize', function () {
+          updateMaxValues();
+     });
+
+     updateMaxValues();
+
+     function updateMaxValues() {
           if (window.innerWidth <= 768) {
                document.getElementById('margin').max = 50;
                document.getElementById('border').max = 50;
@@ -102,7 +108,7 @@
                document.getElementById('border').max = 100;
                document.getElementById('padding').max = 100;
           }
-     });
+     }
 
      document.getElementById('toggle-styles').addEventListener('click', function () {
           const box = document.querySelector('.box');
