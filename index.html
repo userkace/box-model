@@ -84,7 +84,7 @@
           <input style="padding: 10px; border-radius: 10px;" type="text" id="content" name="content"
                value="Made by Kace" maxlength="25" onchange="updateBox()" oninput="updateBox()">
      </div>
-     <footer
+     <footer onload="uiSize()"
           style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); display: flex; flex-direction: row; gap:10px; padding-bottom: 1em;">
           <button onclick="window.location.href = 'https://github.com/userkace/'">GitHub</button>
           <button onclick="window.location.href = 'https://github.com/userkace/box-model'">Repository</button>
@@ -92,6 +92,18 @@
 </body>
 
 <script>
+     window.addEventListener('resize', function () {
+          if (window.innerWidth <= 768) {
+               document.getElementById('margin').max = 50;
+               document.getElementById('border').max = 50;
+               document.getElementById('padding').max = 50;
+          } else {
+               document.getElementById('margin').max = 100;
+               document.getElementById('border').max = 100;
+               document.getElementById('padding').max = 100;
+          }
+     });
+
      document.getElementById('toggle-styles').addEventListener('click', function () {
           const box = document.querySelector('.box');
           const outlineVisible = box.style.outlineWidth !== '0px';
